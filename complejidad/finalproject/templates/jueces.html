@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-8">
+        <a class="btn btn-primary" href="/">volver</a>
+    </div>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <table>
+        {% for i in range(2) %}
+        <tr>
+            {% for j in range(2) %}
+            <td>
+                <input type="text" name="celda_{{ i }}_{{ j }}">
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    <button type="submit">Enviar</button>
+</form>
+
+
+{% endblock %}

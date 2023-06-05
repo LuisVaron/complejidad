@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-8">
+        <a class="btn btn-primary" href="/">volver</a>
+    </div>
+</div>
+<br>
+
+<div class="container text-center">
+    {% autoescape off %}
+    {{error}}
+    {% endautoescape %}
+    <div class="row">
+      <div class="col">
+        <form id="myForm" method="POST" >
+            {% csrf_token %}
+            <div class="container text-center">
+                <div class="row row-cols-3">
+                  <div class="col"><b>Calorias minimas:</b> </div>
+                  <div class="col"><input type="number" name="c_minimas" class="form-control" placeholder="calorias minimas"></div>
+                </div>
+            </div>
+            <br>
+            <table id="fieldsTable">
+                <tr>
+                <th>Plato</th>
+                <th>Calorias</th>
+                </tr>
+                <tr>
+                    <th><input type="text" name="plato[]" class="form-control" placeholder="nombre del plato"></th>
+                    <th><input type="number" name="calorias[]" class="form-control" placeholder="cantidad de calorias"></th>
+                </tr>
+            </table>
+            <br>
+            <button type="button" class="btn btn-primary" onclick="agregarFila()">Agregar Plato</button>
+            <input type="submit" class="btn btn-success" value="Enviar">
+        </form>
+      </div>
+      <div class="col">
+        <p class="fw-bolder">total calorias: {{calorias}} </p>
+        <b>Menú optimo</b>
+        <br>
+        {% for plato, calorias in menu.items %}
+            <p class="fw-bolder fs-3">{{plato}} : {{calorias}}</p>
+        {% endfor %}
+      </div>
+    </div>
+
+{% endblock %}
